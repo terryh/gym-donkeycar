@@ -454,14 +454,14 @@ class DonkeyUnitySimHandler(IMesgHandler):
         max_speed = 10
 
         if done:
-            return -1.0
+            return -15.0 - self.speed / max_speed
 
         if self.cte > self.max_cte:
-            return -1.0
+            return -15.0
 
         # Collision
         if self.hit != "none":
-            return -2.0
+            return -15.0 - self.speed / max_speed
 
         # going fast close to the center of lane yields best reward
         return (1.0 - (self.cte / self.max_cte) ** 2) * (self.speed / max_speed)
